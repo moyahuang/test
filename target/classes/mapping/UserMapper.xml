@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.scu.petcommunity.dao.UserDao">
+    <insert id="addUser" parameterType="cn.scu.petcommunity.domain.dao.UserDO">
+        INSERT INTO tb_user(openid,nickname,province,city,country,headimgurl,unionid,sex,alive,devices)
+        VALUES (#{openid},#{nickname},#{province},#{city},#{country},#{headimgurl},#{unionid},#{sex},#{alive},#{devices});
+    </insert>
+
+    <select id="getUserByOpenid" parameterType="java.lang.String" resultType="cn.scu.petcommunity.domain.dao.UserDO">
+        SELECT * FROM tb_user WHERE openid = #{openid};
+    </select>
+
+    <update id="updateUser">
+        UPDATE tb_user SET devices = #{devices} WHERE uid = #{uid}
+    </update>
+</mapper>

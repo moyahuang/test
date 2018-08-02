@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.scu.petcommunity.dao.DeviceDao">
+
+    <resultMap id="devices" type="cn.scu.petcommunity.domain.dao.DeviceDO">
+        <id column="did" property="did"/>
+        <result column="deviceid" property="deviceid"/>
+        <result column="name" property="name"/>
+    </resultMap> 
+
+    <insert id="addDevice" parameterType="cn.scu.petcommunity.domain.dao.DeviceDO">
+        INSERT INTO tb_device(deviceid, devicename) VALUES (#{deviceid},#{devicename});
+    </insert>
+
+    <select id="getDevicesByDeviceId" resultMap="devices">
+        SELECT * FROM tb_device WHERE deviceid in
+        <foreach collection="array" index="index" item="deviceid" open="(" close=")" separator=",">
+            #{deviceid}
+        </foreach>
+    </select>
+
+</mapper>
